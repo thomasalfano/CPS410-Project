@@ -4,6 +4,14 @@
 <!--added links to font-->
 <head>
 
+  <title>Mind Racers - Sign Up</title>
+  
+  <!--favicon-->
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+  <link rel="manifest" href="favicon/site.webmanifest">
+
   <!--links for playwrite font-->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,217 +24,82 @@
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sign Up</title>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 </head>
 
-
-
 <body>
-  <div class ="title">
-    <h6>Mind Racers</h6>
-    
-  </div>
-
-    <div class = 'signup-form'>
-      <form id = 'form'>
-      
-        <label>Email</label>
-        <input id = 'email' required>
-
-        <label>Confirm Email</label>
-        <input id = 'email2' required>
-
-        <label>Username</label>
-        <input id = 'username' required>
-
-        <label>Password</label>
-        <input id = 'password' required>
-
-        <label>Re-Enter Password</label>
-        <input id = 'password2' required>
-
+    <div class="title">
+      <h6>Mind Racers</h6>
+    </div>
+  
+    <div class="signup-form">
+      <form id="form">
+        <label for="email">Email</label>
+        <input type="email" id="email" required>
+  
+        <label for="email2">Confirm Email</label>
+        <input type="email" id="email2" required>
+  
+        <label for="username">Username</label>
+        <input type="text" id="username" required>
+  
+        <label for="password">Password</label>
+        <input type="password" id="password" required>
+  
+        <label for="password2">Re-Enter Password</label>
+        <input type="password" id="password2" required>
+  
         <button class="submit-button" role="button">Submit</button>
-
-    </form>
-
-    <div id = 'result'>
-
+      </form>
     </div>
-
-    <div class="html">
-      <label>Math Skill Level</label>
-      <input type="range" id="level" value="0">
-      <div id="h4-container"><div id="h4-subcontainer"><h4>0<span></span></h4></div></div>
-    </div>
-
-  </div>
+  
 
 </body>
-</html>
+  
 
 <style>
 
-
-body{
+body {
   display: flex;
   justify-content: center;
-  background-color: white;
-}
-.signup-form{
-  position: absolute;
-
-  border: 1px solid black;
-  border-style: solid;
-  border-radius: 35px;
-  
-  padding: 10px;
-  padding-right: 200px;
+  background-color: lightgrey;
   margin: 0;
+}
+
+.signup-form {
+  position: absolute;
+  border: 1px solid black;
+  border-radius: 35px;
+  padding: 10px 200px 10px 10px; /* Consolidated padding */
   width: 15%;
   height: 75%;
   left: 20px;
   top: 100px;
   text-align: center;
-  
-      font-family: "PT Sans Narrow", sans-serif;
-      font-optical-sizing: auto;
-      font-weight: 500;
-      font-style: normal;
-      font-size: 20px;
-
-}
-
-html {
-  top: 50px;
-  right: 20px;
-	height: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	font-family: 'Work Sans', sans-serif;
-	text-align: center;
-  
-	h1, h2, h3, h4, h5, h6 {
-		margin: 0;
-	}
-	h1 {
-		color: #333;
-		font-weight: 500;
-	}
-	h3 {
-		color: #aaa;
-		font-weight: 500;
-	}
-	h4 {
-    
-		color: #999;
-		font-weight: 500;
-		&:after {
-			content: "%";
-			padding-left: 5px;
-		}
-	}
-	
-	input[type="range"] {
-    cursor: ns-resize;
-    position: absolute;
-    top: 175px;
-    transform: rotate(270deg);
-		outline: 0;
-		border: 0;
-		border-radius: 500px;
-		width: 400px;
-		max-width: 100%;
-		margin: 24px 0 16px;
-		transition: box-shadow 0.2s ease-in-out;
-		
-		@media screen and (-webkit-min-device-pixel-ratio:0) {
-			& {
-				overflow: hidden;
-				height: 40px;
-				-webkit-appearance: none;
-				background-color: #ddd;
-			}
-			&::-webkit-slider-runnable-track {
-				height: 40px;
-				-webkit-appearance: none;
-				color: #444;
-			
-				transition: box-shadow 0.2s ease-in-out;
-			}
-			&::-webkit-slider-thumb {
-				width: 40px;
-				-webkit-appearance: none;
-				height: 40px;
-				cursor: ew-resize;
-				background: #fff;
-				box-shadow: -340px 0 0 320px #1597ff, inset 0 0 0 40px #1597ff;
-				border-radius: 50%;
-				transition: box-shadow 0.2s ease-in-out;
-				position: relative;
-			
-			}
-			&:active::-webkit-slider-thumb {
-				background: #fff;
-				box-shadow: -340px 0 0 320px #1597ff, inset 0 0 0 3px #1597ff;
-			}
-		}
-	
-		&::-moz-range-progress {
-			background-color: #43e5f7; 
-		}
-		&::-moz-range-track {  
-			background-color: #9a905d;
-		}
-		
-		&::-ms-fill-lower {
-			background-color: #43e5f7; 
-		}
-		&::-ms-fill-upper {  
-			background-color: #9a905d;
-		}
-	}
-}
-
-input:not(:active) + #h4-container h4 {
-	opacity: 0;
-	margin-top: -50px;
-	pointer-events: none;
+  font-family: "PT Sans Narrow", sans-serif;
+  font-weight: 500;
+  font-size: 20px;
 }
 
 .submit-button {
+  display: inline-flex;
   align-items: center;
-  appearance: none;
+  justify-content: center;
+  height: 40px;
+  padding: 0 16px;
   background-color: #42d12997;
   border-radius: 20px;
-  border-width: 0;
-  box-shadow: rgba(22, 155, 12, 0.4) 0 2px 4px,rgba(45, 35, 66, 0.3) 0 7px 13px -3px,#52db08 0 -3px 0 inset;
-  box-sizing: border-box;
+  box-shadow: rgba(22, 155, 12, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #52db08 0 -3px 0 inset;
   color: #36395A;
-  cursor: pointer;
-  display: inline-flex;
-  font-family: "JetBrains Mono",monospace;
-  height: 40px;
-  justify-content: center;
-  line-height: 1;
-  list-style: none;
-  overflow: hidden;
-  padding-left: 15px;
-  padding-right: 16px;
-  position: relative;
-  text-align: left;
-  left: 5px;
-  text-decoration: none;
-  transition: box-shadow .15s,transform .15s;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  white-space: nowrap;
-  will-change: box-shadow,transform;
+  font-family: "JetBrains Mono", monospace;
   font-size: 25px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: box-shadow .15s, transform .15s;
+  user-select: none;
+  white-space: nowrap;
 }
 
 .submit-button:focus {
@@ -243,27 +116,28 @@ input:not(:active) + #h4-container h4 {
   transform: translateY(2px);
 }
 
-label{
+label {
   display: block;
+  margin-bottom: 5px;
 }
-input{
+
+input {
   margin-bottom: 20px;
 }
 
 .title {
-        font-family: 'Playwrite PL', sans-serif;
-        position: absolute;
-        top: 0;
-        left: 0;
-        font-size: 80px;
-        font-style: normal;
-    }
-
+  font-family: 'Playwrite PL', sans-serif;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-right: 40px;
+  font-size: 60px;
+}
 
 h6 {
-      margin: 0;
-      padding: 0;
-    }
+  margin: 0;
+  padding: 0;
+}
 
 </style>
 
@@ -285,18 +159,5 @@ h6 {
     console.log(mathLevel);
 
   });
-
-  
-  $(function() {
-	var rangePercent = $('[type="range"]').val();
-	$('[type="range"]').on('change input', function() {
-		rangePercent = $('[type="range"]').val();
-		$('h4').html(rangePercent+'<span></span>');
-		$('[type="range"], h4>span').css('filter', 'hue-rotate(-' + rangePercent + 'deg)');
-		// $('h4').css({'transform': 'translateX(calc(-50% - 20px)) scale(' + (1+(rangePercent/100)) + ')', 'left': rangePercent+'%'});
-		$('h4').css({'transform': 'translateX(-50%) scale(' + (1+(rangePercent/100)) + ')', 'left': rangePercent+'%'});
-	});
-});
-
 
 </script>
