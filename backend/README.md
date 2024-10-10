@@ -1,8 +1,12 @@
+## [Click to view main README](../README.md)
+
 # SpringBoot API to be used for Backend Integration
 
 ## To Run Locally:
 
-**Have a JDK installed on your machine**
+### Install MySQL + MySQL Workbench: [MySQL Installation](https://dev.mysql.com/downloads/installer/)
+
+### Have a JDK of at least version 17: [Download Java](https://www.oracle.com/java/technologies/downloads/)
 
 > Open the terminal:  	`\CPS410-Project\>`
 
