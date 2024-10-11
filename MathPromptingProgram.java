@@ -1,7 +1,7 @@
 
 /* Code by Matthew Kolb and Gabriel Buchanan
  * CPS 410
- * October 30th, 2024
+ * September 30th, 2024
  */
 
  import java.util.Random;
