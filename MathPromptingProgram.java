@@ -2,6 +2,7 @@
 /* Code by Matthew Kolb and Gabriel Buchanan
  * CPS 410
  * September 30th, 2024
+ * Branch Test
  */
 
  import java.util.Random;
