@@ -1,3 +1,4 @@
+package dev._0.mindracers.MathPrompting;
 
 /* Code by Matthew Kolb and Gabriel Buchanan
  * CPS 410
@@ -10,6 +11,7 @@
  import java.time.Instant;
  import java.util.ArrayList;
  import java.util.List;
+ import com.google.gson.Gson;
  
  public class MathPromptingProgram {
  
@@ -142,47 +144,67 @@
         // Ask the user to select the difficulty
         int difficulty = selectDifficulty(scanner);
  
-         do {
+        // Create a list to store generated problems
+        List<MathProblem> problems = new ArrayList<>();
 
-             // Generate a new problem based on difficulty
-             MathProblem problem = generateProblem(difficulty);
+        // Generator and adder 
+        for (int i = 0; i < 5; i++) {
+            MathProblem problem = generateProblem(difficulty);
+            problems.add(problem);
+        }
+
+        // Convert list to JSON
+        Gson gson = new Gson();
+        String json = gson.toJson(problems);
+
+        // Test Print
+        System.out.println("Generated Problems");
+        System.out.println(json);
+        scanner.close();  // Scanner closed here after the loop
+
+
+
+    //      do {
+
+    //          // Generate a new problem based on difficulty
+    //          MathProblem problem = generateProblem(difficulty);
  
-             // Display the problem and options
-             System.out.println("Solve: " + problem.getProblemText());
-             System.out.println("Option 1: " + problem.getOptions()[0]);
-             System.out.println("Option 2: " + problem.getOptions()[1]);
-             System.out.println("Option 3: " + problem.getOptions()[2]);
+    //          // Display the problem and options
+    //          System.out.println("Solve: " + problem.getProblemText());
+    //          System.out.println("Option 1: " + problem.getOptions()[0]);
+    //          System.out.println("Option 2: " + problem.getOptions()[1]);
+    //          System.out.println("Option 3: " + problem.getOptions()[2]);
  
-             // Start timing
-             Instant startTime = Instant.now();
+    //          // Start timing
+    //          Instant startTime = Instant.now();
  
-             // Get user's answer
-             System.out.print("Your answer: ");
-             int userAnswer = scanner.nextInt();
+    //          // Get user's answer
+    //          System.out.print("Your answer: ");
+    //          int userAnswer = scanner.nextInt();
  
-             // Stop timing
-             Instant endTime = Instant.now();
-             Duration timeElapsed = Duration.between(startTime, endTime);
+    //          // Stop timing
+    //          Instant endTime = Instant.now();
+    //          Duration timeElapsed = Duration.between(startTime, endTime);
  
-             // Check if the answer is correct
-             if (checkAnswer(userAnswer, problem)) {
-                 System.out.println("Correct!");
-                // Evaluate the response time
-                evaluateResponseTime(timeElapsed);
+    //          // Check if the answer is correct
+    //          if (checkAnswer(userAnswer, problem)) {
+    //              System.out.println("Correct!");
+    //             // Evaluate the response time
+    //             evaluateResponseTime(timeElapsed);
  
-             } else {
-                 System.out.println("Wrong! The correct answer was: " + problem.getCorrectAnswer());
-             }
+    //          } else {
+    //              System.out.println("Wrong! The correct answer was: " + problem.getCorrectAnswer());
+    //          }
  
-             // Ask if the user wants to play again
-             System.out.print("Would you like to solve another problem? (yes/no): ");
-             playAgain = scanner.next();
+    //          // Ask if the user wants to play again
+    //          System.out.print("Would you like to solve another problem? (yes/no): ");
+    //          playAgain = scanner.next();
  
-         } while (playAgain.equalsIgnoreCase("yes"));
+    //      } while (playAgain.equalsIgnoreCase("yes"));
  
-         System.out.println("Thanks for playing!");
-         scanner.close();  // Scanner closed here after the loop
-     }
+    //      System.out.println("Thanks for playing!");
+    //      scanner.close();  // Scanner closed here after the loop
+    }
  
      // Method to check the answer
      public static boolean checkAnswer(int userAnswer, MathProblem problem) {
