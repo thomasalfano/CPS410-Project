@@ -31,15 +31,48 @@ function App() {
   );
 }
 
-const handleSubmit = (event) => {
+const handleSubmit = async (event) => {
   event.preventDefault();
+
+  const form = document.getElementById('form');
+
   const email = document.getElementById('email').value;
   const username = document.getElementById('username').value;
   const password = document.getElementById('password').value;
 
-  console.log(email);
-  console.log(username);
-  console.log(password);
+  const urlData = new URLSearchParams();
+
+  urlData.append('email', email);
+  urlData.append('username', username);
+  urlData.append('password', password);
+
+  const response = await fetch('http://localhost:8080/auth/signup', {
+    	method: 'POST',
+	headers: {
+		'Content-Type': 'application/x-www-form-urlencoded'
+	},
+	body: urlData
+  });
+
+  if (response.ok) {
+
+    const jsonResponse = await response.json();
+
+    const p = document.createElement("p");
+    form.appendChild(p);
+    
+    if (jsonResponse.success === 0) {
+      p.innerHTML = "User already registered with this email.";
+    } else if (jsonResponse.success ===1) {
+      p.innerHTML = "Registration Successfull";
+    }
+
+  } else {
+    
+    throw new Error('POST request failed');
+    
+    }
+
 };
 
 export default App;
