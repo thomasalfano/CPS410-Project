@@ -1,38 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css'; // Importing the CSS file
 
 function App() {
-  return (
-    <div className="App">
-      <div className="title">
-        <h6>Mind Racers</h6>
-      </div>
-      <div className="signup-form">
-        <form id="form" onSubmit={handleSubmit}>
-          <label htmlFor="email">Email</label>
-          <input type="email" id="email" required />
 
-          <label htmlFor="email2">Confirm Email</label>
-          <input type="email" id="email2" required />
+  const [email, setEmail] = useState('');
+  const [confirmEmail, setConfirmEmail] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [password2, setPassword2] = useState('');
 
-          <label htmlFor="username">Username</label>
-          <input type="text" id="username" required />
 
-          <label htmlFor="password">Password</label>
-          <input type="password" id="password" required />
-
-          <label htmlFor="password2">Re-Enter Password</label>
-          <input type="password" id="password2" required />
-
-          <button className="submit-button" type="submit">Submit</button>
-        </form>
-      </div>
-    </div>
-  );
-}
 
 const handleSubmit = async (event) => {
+
   event.preventDefault();
+
+      // Simple validation
+      if (email !== confirmEmail) {
+        alert("Emails do not match!");
+        return;
+      }
+      if (password !== password2) {
+        alert("Passwords do not match!");
+        return;
+      }
 
   const form = document.getElementById('form');
 
@@ -74,5 +65,65 @@ const handleSubmit = async (event) => {
     }
 
 };
+
+return (
+  <div className="App">
+    <div className="title">
+      <h6>Mind Racers</h6>
+    </div>
+    <div className="signup-form">
+      <form id="form" onSubmit={handleSubmit}>
+        <label htmlFor="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          required
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+
+        <label htmlFor="email2">Confirm Email</label>
+        <input
+          type="email"
+          id="email2"
+          required
+          value={confirmEmail}
+          onChange={(e) => setConfirmEmail(e.target.value)}
+        />
+
+        <label htmlFor="username">Username</label>
+        <input
+          type="text"
+          id="username"
+          required
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+
+        <label htmlFor="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          required
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+
+        <label htmlFor="password2">Re-Enter Password</label>
+        <input
+          type="password"
+          id="password2"
+          required
+          value={password2}
+          onChange={(e) => setPassword2(e.target.value)}
+        />
+
+        <button className="submit-button" type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
+);
+
+}
 
 export default App;
