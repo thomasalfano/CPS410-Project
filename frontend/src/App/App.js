@@ -12,10 +12,12 @@ function Form() {
             // Simple validation
             if (email !== confirmEmail) {
               alert("Emails do not match!");
+              event.preventDefault();
               return;
             }
             if (password !== password2) {
               alert("Passwords do not match!");
+              event.preventDefault();
               return;
             }
             
@@ -66,6 +68,8 @@ function Form() {
     <form id="form" onSubmit={handleSubmit}></form>
 
     const [activeTab, setActiveTab] = useState('signup');
+    const[showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [inputValues, setInputValues] = useState({
       userName: '',
       email: '',
@@ -82,6 +86,10 @@ function Form() {
     const handleTabClick = (tab) => {
       setActiveTab(tab);
     };
+
+    const togglePasswordVisibility = () => {
+      setShowPassword(!showPassword);
+  };
   
     return (
       <div className="form">
@@ -142,17 +150,25 @@ function Form() {
       </div>
 
       <div className="field-wrap">
+        <div className="eye-container">
+          <button type="button" className = "eye" onClick={togglePasswordVisibility}>
+            <i className={showPassword ? "fa fa-eye-slash" : "fa fa-eye"}></i>
+          </button>
+        </div>
+
         <label className={inputValues.password ? 'active highlight' : ''}>
-          Set A Password<span className="req">*</span>
+          Password<span className="req">*</span>
         </label>
+
         <input
-          type="password"
+          type={showPassword ? 'text' : 'password'}
           name="password"
           value={inputValues.password}
           required
           autoComplete="off"
           onChange={handleInputChange}
         />
+
       </div>
 
       <div className="field-wrap">
@@ -160,7 +176,7 @@ function Form() {
           Confirm Password<span className="req">*</span>
         </label>
         <input
-          type="password"
+         type={showPassword ? 'text' : 'password'}
           name="password2"
           value={inputValues.password2}
           required
