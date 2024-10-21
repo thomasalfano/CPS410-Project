@@ -128,7 +128,7 @@ function Form() {
       </div>
 
       <div className="field-wrap">
-        <label className={inputValues.email ? 'active highlight' : ''}>
+        <label className={inputValues.confirmEmail ? 'active highlight' : ''}>
           Confirm Email Address<span className="req">*</span>
         </label>
         <input
