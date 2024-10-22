@@ -23,7 +23,7 @@ public class User {
     @Column(name = "PASSWORD")
     private String password;
 
-    @OneToMany(mappedBy = "USER")
+    @OneToMany(mappedBy = "user_id")
     private Set<Game> games = new HashSet<>();
 
     public Integer getId() {

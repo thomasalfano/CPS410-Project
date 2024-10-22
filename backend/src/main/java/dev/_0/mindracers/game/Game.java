@@ -17,8 +17,8 @@ public class Game {
 
     // relations
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "game_id", referencedColumnName = "id")
-    private User user;
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user_id;
 
     // getters and setters
 
@@ -31,10 +31,10 @@ public class Game {
     }
 
     public User getUser() {
-        return user;
+        return user_id;
     }
 
     public void SetUser(User user) {
-        this.user = user;
+        this.user_id = user;
     }
 }
