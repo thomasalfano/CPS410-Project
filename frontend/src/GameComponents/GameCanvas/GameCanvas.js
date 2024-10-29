@@ -5,6 +5,7 @@ function GameCanvas() {
       id="GameCanvas"
       width="800"
       height="600"
+      style={{ backgroundColor: "black" }}
     ></canvas>
   );
 }
