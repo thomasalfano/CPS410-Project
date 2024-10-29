@@ -1,6 +1,10 @@
-package dev._0.mindracers.example.testdatamysql;
+package dev._0.mindracers.user;
 
 import jakarta.persistence.*;
+import dev._0.mindracers.game.Game;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "USER")
@@ -15,9 +19,12 @@ public class User {
 
     @Column(name = "USERNAME")
     private String username;
-    
+
     @Column(name = "PASSWORD")
     private String password;
+
+    @OneToMany(mappedBy = "user_id")
+    private Set<Game> games = new HashSet<>();
 
     public Integer getId() {
         return id;
