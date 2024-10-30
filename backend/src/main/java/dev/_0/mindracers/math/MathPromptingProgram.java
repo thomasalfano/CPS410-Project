@@ -1,3 +1,4 @@
+package dev._0.mindracers.math;
 
 /* Code by Matthew Kolb and Gabriel Buchanan
  * CPS 410
@@ -137,11 +138,12 @@
      public static void main(String[] args) {
          Scanner scanner = new Scanner(System.in);
          String playAgain;
+
+        // Ask the user to select the difficulty
+        int difficulty = selectDifficulty(scanner);
  
          do {
-             // Ask the user to select the difficulty
-             int difficulty = selectDifficulty(scanner);
- 
+
              // Generate a new problem based on difficulty
              MathProblem problem = generateProblem(difficulty);
  
@@ -162,12 +164,12 @@
              Instant endTime = Instant.now();
              Duration timeElapsed = Duration.between(startTime, endTime);
  
-             // Evaluate the response time
-             evaluateResponseTime(timeElapsed);
- 
              // Check if the answer is correct
              if (checkAnswer(userAnswer, problem)) {
                  System.out.println("Correct!");
+                // Evaluate the response time
+                evaluateResponseTime(timeElapsed);
+ 
              } else {
                  System.out.println("Wrong! The correct answer was: " + problem.getCorrectAnswer());
              }
