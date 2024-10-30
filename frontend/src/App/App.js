@@ -13,11 +13,20 @@ function Title() {
 }
 
 function App() {
+  // temp values
+  const options = ["1", "2", "3", "4"];
+
+  const question = {
+    prompt: "1 + 3",
+    options: options,
+    correctAnswer: "4",
+  };
+
   return (
     <div className="App">
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/game" element={<GamePage options={[1, 2, 3, 4]} />} />
+        <Route path="/game" element={<GamePage question={question} />} />
       </Routes>
     </div>
   );
