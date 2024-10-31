@@ -41,17 +41,24 @@ function Form() {
     if (response.ok) {
       const jsonResponse = await response.json();
 
-      const p = document.createElement("p");
-      p.setAttribute("id", "user-exists");
+      const output = document.createElement("h2");
+      output.setAttribute("id", "user-exists");
 
-      if (document.getElementById("user-exists")) {
-        form.appendChild(p);
+      if (!document.getElementById("user-exists")) {
+        form.appendChild(output);
       }
 
       if (jsonResponse.success === 0) {
-        p.innerHTML = "User already registered with this email.";
+        output.innerText = "User already registered with this email.";
       } else if (jsonResponse.success === 1) {
-        p.innerHTML = "Registration Successfull";
+        output.innerText = "Registration Successfull";
+        setInputValues({
+          userName: "",
+          email: "",
+          confirmEmail: "",
+          password: "",
+          password2: "",
+        });
       }
     } else {
       throw new Error("POST request failed");
