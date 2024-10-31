@@ -1,6 +1,7 @@
 package dev._0.mindracers.game;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,22 +23,22 @@ import dev._0.mindracers.user.UserRepository;
 @RestController
 @RequestMapping(path = "/scores")
 public class GameScoreController {
-    
+
     @Autowired
     private GameRepository gameRepository;
 
     @Autowired
     private UserRepository userRepository;
 
-    @PostMapping(path="/save-score")
+    @PostMapping(path = "/save-score")
     public @ResponseBody String storeNewScore(@RequestParam int score,
-    @RequestParam int userID, @RequestParam LocalDateTime gameDate) {
+            @RequestParam int userID, @RequestParam LocalDateTime gameDate) {
 
         Optional<User> user = userRepository.findById(userID);
 
         if (!user.isPresent()) {
             return "{\"savedResult: false\"}";
-        } 
+        }
 
         User userResult = user.get();
 
@@ -44,14 +46,14 @@ public class GameScoreController {
         newGame.setScore(score);
         newGame.setUser(userResult);
         newGame.setTime(gameDate);
-        
+
         gameRepository.save(newGame);
         return "{\"savedResult: true\"}";
     }
 
     @GetMapping("/scores") // Specify a clear endpoint
     public ResponseEntity<Iterable<Game>> viewAllScores() {
-        Iterable<Game> games = gameRepository.findAll();
+        ArrayList<Game> games = (ArrayList<Game>) gameRepository.findAll();
 
         if (!games.iterator().hasNext()) {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
@@ -60,4 +62,15 @@ public class GameScoreController {
         return ResponseEntity.ok(games);
     }
 
+    @GetMapping("/user/{id}")
+    public ResponseEntity<Iterable<Game>> viewUserScores(@PathVariable int id) {
+
+        Optional<User> user = userRepository.findById(id);
+
+        if (!user.isPresent()) {
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
+        }
+
+        return ResponseEntity.ok(user.get().getGames());
+    }
 }
