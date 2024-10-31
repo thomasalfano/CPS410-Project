@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./Form.css";
 
 function Form() {
+  //signup form submit 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -51,7 +52,7 @@ function Form() {
       if (jsonResponse.success === 0) {
         output.innerText = "User already registered with this email.";
       } else if (jsonResponse.success === 1) {
-        output.innerText = "Registration Successfull";
+        output.innerText = "Registration Successful";
         setInputValues({
           userName: "",
           email: "",
@@ -76,9 +77,20 @@ function Form() {
     password2: "",
   });
 
+//to differentiate the signup and login email and password fields
+  const[loginValues, setLoginValues] = useState({
+    email: "",
+    password: "",
+  })
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setInputValues({ ...inputValues, [name]: value });
+  };
+
+  const handleLoginChange = (e) => {
+    const { name, value } = e.target;
+    setLoginValues({ ...loginValues, [name]: value });
   };
 
   const handleTabClick = (tab) => {
@@ -89,6 +101,59 @@ function Form() {
     setShowPassword(!showPassword);
   };
 
+  //login form submit 
+  const handleLoginSubmit = async (event) => {
+    event.preventDefault();
+
+    const email = document.getElementById("login-email").value;
+    const password = document.getElementById("login-password").value;
+
+    //testing purposes
+    console.log(email, password);
+  
+    const urlData = new URLSearchParams();
+    urlData.append("email", email);
+    urlData.append("password", password);
+  
+    const response = await fetch("http://localhost:8080/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: urlData,
+    });
+  
+    if (response.ok) {
+      console.log(response);
+      const jsonResponse = await response.json();
+
+      console.log(jsonResponse);
+      
+      const output = document.createElement("h2");
+      output.setAttribute("id", "login-response");
+  
+      if (!document.getElementById("login-response")) {
+        const form = document.getElementById("login-form");
+        form.appendChild(output);
+      }
+  
+      if (jsonResponse.success === 1) {
+        output.innerText = "Login successful!";
+        setLoginValues({
+          email: "",
+          password: "",
+        });
+
+      } else if (jsonResponse.success === 0){
+        output.innerText = "Invalid email or password.";
+      }
+    } else {
+      //ok: false when invalid credentials * still fixing
+      console.log(response);
+      throw new Error("POST request failed");
+    }
+  };
+  
   return (
     <div className="form">
       <ul className="tab-group">
@@ -214,33 +279,33 @@ function Form() {
           style={{ display: activeTab === "login" ? "block" : "none" }}
         >
           <h1>Welcome Back!</h1>
-          <form action="/" method="post">
+          <form id ="login-form" onSubmit={handleLoginSubmit}>
             <div className="field-wrap">
-              <label className={inputValues.email ? "active highlight" : ""}>
+              <label className={loginValues.email ? "active highlight" : ""}>
                 Email Address<span className="req">*</span>
               </label>
               <input
                 type="email"
                 name="email"
-                value={inputValues.email}
+                id="login-email"
+                value={loginValues.email}
                 required
                 autoComplete="off"
-                onChange={handleInputChange}
-              />
+                onChange={handleLoginChange}               />
             </div>
 
             <div className="field-wrap">
-              <label className={inputValues.password ? "active highlight" : ""}>
+              <label className={loginValues.password ? "active highlight" : ""}>
                 Password<span className="req">*</span>
               </label>
               <input
                 type="password"
                 name="password"
-                value={inputValues.password}
+                id="login-password"
+                value={loginValues.password}
                 required
                 autoComplete="off"
-                onChange={handleInputChange}
-              />
+                onChange={handleLoginChange}              />
             </div>
 
             <p className="forgot">
