@@ -1,6 +1,8 @@
 package dev._0.mindracers.auth.signup;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,13 +22,14 @@ public class SignUpController {
   private UserRepository userRepository;
 
   @PostMapping(path = "/signup")
-  public @ResponseBody String addNewUser(@RequestParam String email,
+  public @ResponseBody ResponseEntity<String> addNewUser(@RequestParam String email,
       @RequestParam String username, @RequestParam String password) {
     // @ResponseBody means the returned String is the response, not a view name
     // @RequestParam means it is a parameter from the GET or POST request
 
     if (userRepository.findByEmail(email) != null) {
-      return "{\"success\":0}";
+      return ResponseEntity.status(HttpStatus.CONFLICT)
+          .body("Email is already in use.");
     }
 
     dev._0.mindracers.user.User n = new User();
@@ -34,6 +37,7 @@ public class SignUpController {
     n.setUsername(username);
     n.setPassword(password);
     userRepository.save(n);
-    return "{\"success\":1}";
+    return ResponseEntity.status(HttpStatus.CREATED)
+        .body("User registered successfully.");
   }
 }

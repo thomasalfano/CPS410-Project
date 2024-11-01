@@ -31,13 +31,13 @@ public class GameScoreController {
     private UserRepository userRepository;
 
     @PostMapping(path = "/save-score")
-    public @ResponseBody String storeNewScore(@RequestParam int score,
+    public @ResponseBody ResponseEntity<String> storeNewScore(@RequestParam int score,
             @RequestParam int userID, @RequestParam LocalDateTime gameDate) {
 
         Optional<User> user = userRepository.findById(userID);
 
         if (!user.isPresent()) {
-            return "{\"savedResult: false\"}";
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body("User not found!");
         }
 
         User userResult = user.get();
@@ -48,7 +48,7 @@ public class GameScoreController {
         newGame.setTime(gameDate);
 
         gameRepository.save(newGame);
-        return "{\"savedResult: true\"}";
+        return ResponseEntity.ok("Game saved successfully!");
     }
 
     @GetMapping("/scores") // Specify a clear endpoint
