@@ -1,6 +1,12 @@
-package dev._0.mindracers.example.testdatamysql;
+package dev._0.mindracers.user;
 
 import jakarta.persistence.*;
+import dev._0.mindracers.game.Game;
+
+import java.util.HashSet;
+import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "USER")
@@ -10,14 +16,20 @@ public class User {
     @Column(name = "ID")
     private Integer id;
 
+    @JsonIgnore
     @Column(name = "EMAIL")
     private String email;
 
     @Column(name = "USERNAME")
     private String username;
-    
+
+    @JsonIgnore
     @Column(name = "PASSWORD")
     private String password;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user_id")
+    private Set<Game> games = new HashSet<>();
 
     public Integer getId() {
         return id;
@@ -49,5 +61,9 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Set<Game> getGames() {
+        return this.games;
     }
 }

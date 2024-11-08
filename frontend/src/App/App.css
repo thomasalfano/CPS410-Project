@@ -5,73 +5,22 @@ body {
   margin: 0;
 }
 
-.signup-form {
-  position: absolute;
-  border: 1px solid black;
-  border-radius: 35px;
-  padding: 10px 200px 10px 10px;
-  width: 15%;
-  height: 75%;
-  left: 20px;
-  top: 100px;
-  text-align: center;
-  font-family: "PT Sans Narrow", sans-serif;
-  font-weight: 500;
-  font-size: 20px;
-}
-
-.submit-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  height: 40px;
-  padding: 0 16px;
-  background-color: #42d12997;
-  border-radius: 20px;
-  box-shadow: rgba(22, 155, 12, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #52db08 0 -3px 0 inset;
-  color: #36395A;
-  font-family: "JetBrains Mono", monospace;
-  font-size: 25px;
-  cursor: pointer;
-  text-decoration: none;
-  transition: box-shadow .15s, transform .15s;
-  user-select: none;
-  white-space: nowrap;
-}
-
-.submit-button:focus {
-  box-shadow: #0aad5e 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #13a808 0 -3px 0 inset;
-}
-
-.submit-button:hover {
-  box-shadow: rgba(9, 159, 44, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #037b49 0 -3px 0 inset;
-  transform: translateY(-2px);
-}
-
-.submit-button:active {
-  box-shadow: #D6D6E7 0 3px 7px inset;
-  transform: translateY(2px);
-}
-
-label {
-  display: block;
-  margin-bottom: 5px;
-}
-
 input {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .title {
   font-family: 'Playwrite PL', sans-serif;
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   margin-right: 40px;
-  font-size: 60px;
+  font-size: 80px;
+  color: #4169E1;
 }
 
 h6 {
   margin: 0;
   padding: 0;
 }
+
