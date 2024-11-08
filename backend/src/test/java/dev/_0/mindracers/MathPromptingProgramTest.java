@@ -2,7 +2,6 @@ package dev._0.mindracers;
 
 import dev._0.mindracers.math.MathPromptingProgram;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 import static org.junit.jupiter.api.Assertions.*;
 import java.time.Duration;
 

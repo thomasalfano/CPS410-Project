@@ -1,4 +1,4 @@
-package dev._0.mindracers.MathPrompting;
+package dev._0.mindracers.math;
 
 public class MathProblem {
     private int num1;
