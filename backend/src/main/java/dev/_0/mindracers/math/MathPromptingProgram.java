@@ -135,9 +135,9 @@ public class MathPromptingProgram {
         int points = calculatePoints(duration);
 
         System.out.println("Time taken: " + duration.getSeconds() + " seconds.");
-        System.out.println("Points earned: " + points);
         if (checkAnswer(userAnswer, problem)) {
             System.out.println("Correct!");
+            System.out.println("Points earned: " + points);
         } else {
             System.out.println("Incorrect. The correct answer was " + problem.getCorrectAnswer());
         }
