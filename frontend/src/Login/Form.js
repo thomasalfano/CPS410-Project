@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./Form.css";
 
 function Form() {
-  //signup form submit 
+  //signup form submit
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -69,6 +69,7 @@ function Form() {
   const [activeTab, setActiveTab] = useState("signup");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [showLoginStatus, setLoginStatus] = useState("");
   const [inputValues, setInputValues] = useState({
     userName: "",
     email: "",
@@ -77,11 +78,11 @@ function Form() {
     password2: "",
   });
 
-//to differentiate the signup and login email and password fields
-  const[loginValues, setLoginValues] = useState({
+  //to differentiate the signup and login email and password fields
+  const [loginValues, setLoginValues] = useState({
     email: "",
     password: "",
-  })
+  });
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -101,7 +102,7 @@ function Form() {
     setShowPassword(!showPassword);
   };
 
-  //login form submit 
+  //login form submit
   const handleLoginSubmit = async (event) => {
     event.preventDefault();
 
@@ -110,11 +111,11 @@ function Form() {
 
     //testing purposes
     console.log(email, password);
-  
+
     const urlData = new URLSearchParams();
     urlData.append("email", email);
     urlData.append("password", password);
-  
+
     const response = await fetch("http://localhost:8080/auth/login", {
       method: "POST",
       headers: {
@@ -122,38 +123,25 @@ function Form() {
       },
       body: urlData,
     });
-  
+
     if (response.ok) {
       console.log(response);
       const jsonResponse = await response.json();
 
       console.log(jsonResponse);
-      
-      const output = document.createElement("h2");
-      output.setAttribute("id", "login-response");
-  
-      if (!document.getElementById("login-response")) {
-        const form = document.getElementById("login-form");
-        form.appendChild(output);
-      }
-  
-      if (jsonResponse.success === 1) {
-        output.innerText = "Login successful!";
-        setLoginValues({
-          email: "",
-          password: "",
-        });
 
-      } else if (jsonResponse.success === 0){
-        output.innerText = "Invalid email or password.";
-      }
+      setLoginStatus("Logged in!");
+      setLoginValues({
+        email: "",
+        password: "",
+      });
     } else {
-      //ok: false when invalid credentials * still fixing
+      //ok: false when invalid credentials
       console.log(response);
-      throw new Error("POST request failed");
+      setLoginStatus("Invalid email or password.");
     }
   };
-  
+
   return (
     <div className="form">
       <ul className="tab-group">
@@ -279,7 +267,7 @@ function Form() {
           style={{ display: activeTab === "login" ? "block" : "none" }}
         >
           <h1>Welcome Back!</h1>
-          <form id ="login-form" onSubmit={handleLoginSubmit}>
+          <form id="login-form" onSubmit={handleLoginSubmit}>
             <div className="field-wrap">
               <label className={loginValues.email ? "active highlight" : ""}>
                 Email Address<span className="req">*</span>
@@ -291,7 +279,8 @@ function Form() {
                 value={loginValues.email}
                 required
                 autoComplete="off"
-                onChange={handleLoginChange}               />
+                onChange={handleLoginChange}
+              />
             </div>
 
             <div className="field-wrap">
@@ -305,8 +294,11 @@ function Form() {
                 value={loginValues.password}
                 required
                 autoComplete="off"
-                onChange={handleLoginChange}              />
+                onChange={handleLoginChange}
+              />
             </div>
+
+            <h2>{showLoginStatus}</h2>
 
             <p className="forgot">
               <a href="#">Forgot Password?</a>

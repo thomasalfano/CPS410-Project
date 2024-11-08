@@ -30,6 +30,7 @@ public class GameScoreController {
     @Autowired
     private UserRepository userRepository;
 
+    // TODO setup timed answers
     @PostMapping(path = "/save-score")
     public @ResponseBody ResponseEntity<String> storeNewScore(@RequestParam int score,
             @RequestParam int userID, @RequestParam LocalDateTime gameDate) {
@@ -37,7 +38,7 @@ public class GameScoreController {
         Optional<User> user = userRepository.findById(userID);
 
         if (!user.isPresent()) {
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).body("User not found!");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("User not found!");
         }
 
         User userResult = user.get();
