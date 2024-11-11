@@ -2,7 +2,7 @@ package dev._0.mindracers;
 
 import org.springframework.web.bind.annotation.*;
 
-import dev._0.mindracers.math.MathProblem;
+import dev._0.mindracers.math.MathPromptingProgram.MathProblem;
 
 import java.util.List;
 
