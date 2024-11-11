@@ -90,19 +90,24 @@ public class MathPromptingProgram {
 
         int wrongAnswer1 = correctAnswer + random.nextInt(10) + 1;
         int wrongAnswer2 = correctAnswer - (random.nextInt(10) + 1);
+        int wrongAnswer3 = correctAnswer - (random.nextInt(10) + 1);
 
-        while (wrongAnswer1 == correctAnswer || wrongAnswer1 == wrongAnswer2) {
+        while (wrongAnswer1 == correctAnswer || wrongAnswer1 == wrongAnswer2 || wrongAnswer1 == wrongAnswer3) {
             wrongAnswer1 = correctAnswer + random.nextInt(10) + 1;
         }
-        while (wrongAnswer2 == correctAnswer || wrongAnswer2 == wrongAnswer1) {
+        while (wrongAnswer2 == correctAnswer || wrongAnswer2 == wrongAnswer1 || wrongAnswer3 == wrongAnswer2) {
             wrongAnswer2 = correctAnswer - (random.nextInt(10) + 1);
         }
+        while (wrongAnswer3 == correctAnswer || wrongAnswer2 == wrongAnswer3 || wrongAnswer3 == wrongAnswer1) {
+            wrongAnswer3 = correctAnswer - (random.nextInt(10) + 1);
+        }
 
-        int correctPosition = random.nextInt(3);
-        int[] options = new int[3];
+        int correctPosition = random.nextInt(4);
+        int[] options = new int[4];
         options[correctPosition] = correctAnswer;
-        options[(correctPosition + 1) % 3] = wrongAnswer1;
-        options[(correctPosition + 2) % 3] = wrongAnswer2;
+        options[(correctPosition + 1) % 4] = wrongAnswer1;
+        options[(correctPosition + 2) % 4] = wrongAnswer2;
+        options[(correctPosition + 3) % 4] = wrongAnswer3;
 
         return new MathProblem(num1, num2, operation, correctAnswer, options);
     }

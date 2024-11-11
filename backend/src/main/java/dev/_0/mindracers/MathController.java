@@ -1,14 +1,16 @@
-package dev._0.mindracers.MathPrompting;
+package dev._0.mindracers;
 
 import org.springframework.web.bind.annotation.*;
-import dev._0.mindracers.MathPrompting.MathProblem;
+
+import dev._0.mindracers.math.MathProblem;
+
 import java.util.List;
 
 @RestController
 @RequestMapping("/math")
 
 public class MathController {
-    
+
     // Post to receive the Json list
     @PostMapping("/submit")
     public String receiveProblems(@RequestBody List<MathProblem> problems) {

@@ -1,4 +1,4 @@
-package dev._0.mindracers.MathPrompting;
+package dev._0.mindracers.math;
 
 public class MathProblem {
     private int num1;
@@ -17,9 +17,23 @@ public class MathProblem {
     }
 
     // Getters and Setters
-    public int getNum1() { return num1; }
-    public int getNum2() { return num2; }
-    public int getOperation() { return operation; }
-    public int getCorrectAnswer() { return correctAnswer; }
-    public int[] getOptions() { return options; }
+    public int getNum1() {
+        return num1;
+    }
+
+    public int getNum2() {
+        return num2;
+    }
+
+    public int getOperation() {
+        return operation;
+    }
+
+    public int getCorrectAnswer() {
+        return correctAnswer;
+    }
+
+    public int[] getOptions() {
+        return options;
+    }
 }
