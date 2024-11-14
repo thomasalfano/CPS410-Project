@@ -1,7 +1,6 @@
 package dev._0.mindracers.math;
 
-import java.time.Duration;
-import java.time.Instant;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -112,43 +111,6 @@ public class MathPromptingProgram {
         return new MathProblem(num1, num2, operation, correctAnswer, options);
     }
 
-    // Method to calculate points based on response time
-    public static int calculatePoints(Duration duration) {
-        long seconds = duration.getSeconds();
-        if (seconds < 5) return 10;
-        else if (seconds < 10) return 7;
-        else if (seconds < 15) return 5;
-        else if (seconds < 20) return 3;
-        else return 0;
-    }
-
-    // Method to ask a question and time the response
-    public static int askTimedQuestion(MathProblem problem, Scanner scanner) {
-        System.out.println("Solve: " + problem.getProblemText());
-        System.out.println("Options: ");
-        int[] options = problem.getOptions();
-        for (int i = 0; i < options.length; i++) {
-            System.out.println((i + 1) + ". " + options[i]);
-        }
-        System.out.print("Your answer: ");
-
-        Instant start = Instant.now();
-        int userAnswer = scanner.nextInt();
-        Instant end = Instant.now();
-
-        Duration duration = Duration.between(start, end);
-        int points = calculatePoints(duration);
-
-        System.out.println("Time taken: " + duration.getSeconds() + " seconds.");
-        if (checkAnswer(userAnswer, problem)) {
-            System.out.println("Correct!");
-            System.out.println("Points earned: " + points);
-        } else {
-            System.out.println("Incorrect. The correct answer was " + problem.getCorrectAnswer());
-        }
-        return points;
-    }
-
     // Main method
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -164,12 +126,6 @@ public class MathPromptingProgram {
         String json = gson.toJson(problems);
         System.out.println("Generated Problems:");
         System.out.println(json);
-
-        int totalScore = 0;
-        for (MathProblem problem : problems) {
-            totalScore += askTimedQuestion(problem, scanner);
-        }
-        System.out.println("Total Score: " + totalScore);
 
         scanner.close();
     }
