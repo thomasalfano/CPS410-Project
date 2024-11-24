@@ -1,0 +1,17 @@
+#option-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+
+    margin: 0px;
+}
+
+#prompt-output {
+    font-size: 32px;
+    text-align: center;
+}
+
+#result-output {
+    text-align: center;
+}
