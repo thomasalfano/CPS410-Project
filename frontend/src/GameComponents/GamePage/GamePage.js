@@ -1,3 +1,4 @@
+import "./GamePage.css";
 import GameCanvas from "../GameCanvas/GameCanvas";
 import Option from "../Option/Option";
 import { useState, useEffect } from "react";
@@ -6,6 +7,10 @@ function GamePage() {
   const [showOutput, setOutput] = useState("");
   const [questions, setQuestions] = useState([]);
   const [activeQuestionIndex, setActiveQuestionIndex] = useState(0);
+  const [handleCorrect, setHandleCorrect] = useState(null);
+
+  // use for setting win/loss state
+  const [hasWon, setHasWon] = useState(false);
 
   useEffect(() => {
     fetch("http://localhost:8080/game/getProblems", {
@@ -27,6 +32,10 @@ function GamePage() {
     if (activeQuestionIndex < questions.length - 1) {
       setActiveQuestionIndex(activeQuestionIndex + 1);
     }
+
+    if (activeQuestionIndex === questions.length - 1) {
+      setHasWon(true);
+    }
   };
 
   // variables used to display problem and choices
@@ -42,6 +51,7 @@ function GamePage() {
   const handleOptionClick = (value) => {
     if (value === activeQuestion.correctAnswer) {
       setOutput("Correct!");
+      handleCorrect(activeQuestionIndex);
       nextQuestion();
     } else {
       setOutput("Incorrect, try again!");
@@ -55,7 +65,7 @@ function GamePage() {
       </h2>
 
       <div>
-        <GameCanvas />
+        <GameCanvas correctAnswerTrigger={setHandleCorrect} />
       </div>
 
       <div>
@@ -72,6 +82,17 @@ function GamePage() {
           ))}
         </div>
       </div>
+      {hasWon && (
+        <div id="overlay">
+          <div id="result-popup">
+            <h2>You Won!</h2>
+            <p>Your Score: </p>
+            <p>Your total time: </p>
+
+            <button onClick={() => window.location.reload()}>Play Again</button>
+          </div>
+        </div>
+      )}
     </>
   );
 }

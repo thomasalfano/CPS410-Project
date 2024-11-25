@@ -1,50 +1,48 @@
+import roadImage from "../Gameplay/road.png";
+
 class Road {
   constructor(ctx) {
     this.ctx = ctx;
-    this.lines = [];
+    this.roads = [];
 
-    for (let i = 0; i < 5; i++) {
-      let line = new Line(
-        this.ctx,
-        (this.ctx.canvas.width / 5) * i,
-        (3 / 4) * this.ctx.canvas.height + 50
+    // Load the road image
+    this.image = new Image();
+    this.image.src = roadImage;
+
+    // Create three road segments positioned next to each other
+    for (let i = 0; i < 4; i++) {
+      this.roads.push({
+        x: i * ctx.canvas.width, // Position them side by side
+        y: ctx.canvas.height / 3, // Assuming the road starts at the top of the canvas
+      });
+    }
+
+    this.speed = 2; // Speed of the scrolling background
+  }
+
+  update() {
+    // Move each road segment to the left
+    this.roads.forEach((road) => {
+      road.x -= this.speed;
+
+      // Reset the road's position when it moves off-screen
+      if (road.x + this.ctx.canvas.width <= 0) {
+        road.x = this.ctx.canvas.width * (this.roads.length - 1);
+      }
+    });
+  }
+
+  draw() {
+    // Draw each road segment
+    this.roads.forEach((road) => {
+      this.ctx.drawImage(
+        this.image,
+        road.x,
+        road.y,
+        this.ctx.canvas.width,
+        this.ctx.canvas.height
       );
-      this.lines.push(line);
-    }
-  }
-
-  update() {
-    this.lines.map((line) => {
-      line.update();
     });
-  }
-
-  draw() {
-    this.lines.map((line) => {
-      line.draw();
-    });
-  }
-}
-
-class Line {
-  constructor(ctx, x, y) {
-    this.ctx = ctx;
-    this.x = x;
-    this.y = y;
-    this.speed = 2;
-  }
-
-  update() {
-    this.x -= this.speed;
-
-    if (this.x + 50 < 0) {
-      this.x = this.ctx.canvas.width;
-    }
-  }
-
-  draw() {
-    this.ctx.fillStyle = "white";
-    this.ctx.fillRect(this.x, this.y, 50, 5);
   }
 }
 

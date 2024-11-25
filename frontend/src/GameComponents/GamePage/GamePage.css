@@ -1,0 +1,48 @@
+#result-output {
+  text-align: center;
+  padding: 16px;
+  margin-top: 10;
+  color: white;
+
+  position: absolute;
+  top: 0;
+  left: 50;
+  width: 1400px;
+}
+
+#result-popup {
+  position: fixed;
+  top: 25%;
+  left: 25%;
+  width: 50%;
+  height: 50vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+
+  padding: 0px 32px 32px 32px;
+
+  background-color: rgba(0, 206, 209);
+  border-radius: 20px;
+}
+
+#result-popup > h2 {
+  text-align: center;
+  width: 100%;
+
+  font-size: 64px;
+}
+
+#overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+
+  background-color: rgba(0, 0, 0, 0.5); /* Black color with 50% opacity */
+
+  z-index: 500;
+}

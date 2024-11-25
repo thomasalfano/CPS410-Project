@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import Car from "./Gameplay/Car";
 import Road from "./Gameplay/Road";
 
-function GameCanvas() {
+function GameCanvas({ correctAnswerTrigger }) {
   const canvasRef = useRef(null);
   const carRef = useRef(null);
   const roadRef = useRef(null);
@@ -12,7 +12,7 @@ function GameCanvas() {
     const ctx = canvas.getContext("2d");
 
     // players car
-    carRef.current = new Car(ctx, 0, (3 / 4) * ctx.canvas.height - 80);
+    carRef.current = new Car(ctx, -30, (3 / 4) * ctx.canvas.height);
     const car = carRef.current;
 
     // the infinite scroll road
@@ -38,16 +38,24 @@ function GameCanvas() {
       window.requestAnimationFrame(draw);
     }
 
+    function handleCorrect(questionIndex) {
+      car.handleCorrect(questionIndex);
+    }
+
     draw();
-  }, []); // Added dependency array to run the effect only once
+
+    if (correctAnswerTrigger) {
+      correctAnswerTrigger(() => handleCorrect);
+    }
+  }, [correctAnswerTrigger]); // Added dependency array to run the effect only once
 
   return (
     <canvas
       ref={canvasRef}
       data-testid="GameCanvas"
       id="GameCanvas"
-      width="800"
-      height="600"
+      height={700}
+      width={1400}
       style={{ backgroundColor: "black" }}
     ></canvas>
   );
