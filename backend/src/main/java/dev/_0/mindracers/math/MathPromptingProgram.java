@@ -50,7 +50,8 @@ public class MathPromptingProgram {
         System.out.println("Select difficulty:");
         System.out.println("1. Easy (Addition)");
         System.out.println("2. Medium (Addition and Subtraction)");
-        System.out.println("3. Hard (Addition, Subtraction, Multiplication, and Division)");
+        System.out.println("3. Hard (Addition, Subtraction, Multiplication)");
+        System.out.println("4. Extreme (Multiplication, and Division)");
         System.out.print("Your choice: ");
         return scanner.nextInt();
     }
@@ -63,29 +64,36 @@ public class MathPromptingProgram {
         int operation;
 
         if (difficulty == 1) {
-            operation = 0;  // Only addition
+            num1 = random.nextInt(100) + 1;
+            num2 = random.nextInt(100) + 1;
+            operation = 0;  // Only Addition
         } else if (difficulty == 2) {
-            operation = random.nextInt(2);  // Addition or subtraction
+            num1 = random.nextInt(100) + 1;
+            num2 = random.nextInt(100) + 1;
+            operation = random.nextInt(2);  // Addition or Subtraction
+        } else if (difficulty == 3) {
+            num1 = random.nextInt(90) + 11; // Avoid numbers 1-10
+            num2 = random.nextInt(90) + 11; // Avoid numbers 1-10
+            operation = random.nextInt(3);   // Addition, Subtraction, or Multiplication
         } else {
-            operation = random.nextInt(4);  // Addition, subtraction, multiplication, or division
-        }
+            num1 = random.nextInt(90) + 11; // Avoid numbers 1-10
+            num2 = random.nextInt(90) + 11; // Avoid numbers 1-10
+            operation = random.nextInt(2) + 2;  // Multiplication or Division
 
         int correctAnswer;
-        if (operation == 0) {
-            correctAnswer = num1 + num2;
-        } else if (operation == 1) {
-            correctAnswer = num1 - num2;
-        } else if (operation == 2) {
-            num1 = random.nextInt(12) + 1;
-            num2 = random.nextInt(12) + 1;
-            correctAnswer = num1 * num2;
-        } else {
-            while (num1 % num2 != 0) {
-                num1 = random.nextInt(100) + 1;
-                num2 = random.nextInt(100) + 1;
+            if (operation == 0) {
+                correctAnswer = num1 + num2;
+            } else if (operation == 1) {
+                correctAnswer = num1 - num2;
+            } else if (operation == 2) {
+                correctAnswer = num1 * num2;
+            } else {
+                while (num1 % num2 != 0) {
+                    num1 = random.nextInt(90) + 11; // Avoid easy division
+                    num2 = random.nextInt(90) + 11; // Avoid easy division
+                }
+                correctAnswer = num1 / num2;
             }
-            correctAnswer = num1 / num2;
-        }
 
         int wrongAnswer1 = correctAnswer + random.nextInt(10) + 1;
         int wrongAnswer2 = correctAnswer - (random.nextInt(10) + 1);

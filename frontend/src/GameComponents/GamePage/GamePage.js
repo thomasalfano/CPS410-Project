@@ -2,6 +2,7 @@ import "./GamePage.css";
 import GameCanvas from "../GameCanvas/GameCanvas";
 import Option from "../Option/Option";
 import { useState, useEffect } from "react";
+import "./GamePage.css";
 
 function GamePage() {
   const [showOutput, setOutput] = useState("");
@@ -72,7 +73,7 @@ function GamePage() {
         <h2 id="prompt-output" data-testid="prompt-output">
           {prompt}
         </h2>
-        <div>
+        <div id="option-container">
           {options.map((option, index) => (
             <Option
               key={index}
