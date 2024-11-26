@@ -1,4 +1,4 @@
-import roadImage from "../Gameplay/road.png";
+import roadImage from "../Gameplay/single_lane.png";
 
 class Road {
   constructor(ctx) {
@@ -10,10 +10,10 @@ class Road {
     this.image.src = roadImage;
 
     // Create three road segments positioned next to each other
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < 2; i++) {
       this.roads.push({
         x: i * ctx.canvas.width, // Position them side by side
-        y: ctx.canvas.height / 3, // Assuming the road starts at the top of the canvas
+        y: 0, // Assuming the road starts at the top of the canvas
       });
     }
 

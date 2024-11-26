@@ -15,14 +15,11 @@ class Car {
     this.speed = speed;
   }
 
-  setStoppingPoint(stoppingPoint) {
-    this.currentStoppingPoint = stoppingPoint;
-  }
-
   handleCorrect(questionIndex) {
-    this.speed = 0.5;
+    this.speed = 1;
 
-    this.setStoppingPoint(questionIndex * (this.ctx.canvas.width / 5) + 50);
+    this.currentStoppingPoint =
+      questionIndex * (this.ctx.canvas.width / 5) + 50;
   }
 
   update() {
@@ -35,7 +32,6 @@ class Car {
   }
 
   draw() {
-    //this.ctx.fillRect(this.x, this.y, 100, 100);
     this.ctx.drawImage(this.image, this.x, this.y, 250, 150);
   }
 }
